@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Theme"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!-- More info: https://docs.microsoft.com/en-us/windows/uwp/design/controls-and-patterns/resourcedictionary-and-xaml-resource-references -->
+    <!-- Try to copy this style: https://docs.telerik.com/devtools/wpf/styling-and-appearance/themes-suite/common-styling-appearance-material-theme -->
+
+    <!-- Colors -->
+    <Color x:Key="PrimaryColor">#FFFAFAFA</Color>
+    <Color x:Key="DividerColor">#FFD1D1D1</Color>
+    <Color x:Key="ComplementaryColor">#FFE0E0E0</Color>
+
+    <Color x:Key="MarkerColor">#FF000000</Color>
+    <Color x:Key="MarkerInvertedColor">#FFFFFFFF</Color>
+
+    <Color x:Key="PrimaryNormalColor">#FF3F51B5</Color>
+    <Color x:Key="PrimaryFocusColor">#FF9FA8DA</Color>
+    <Color x:Key="PrimaryHoverColor">#FF303F9F</Color>
+    <Color x:Key="PrimaryPressedColor">#FF1A237E</Color>
+
+    <Color x:Key="AccentNormalColor">#FFFFAB40</Color>
+    <Color x:Key="AccentFocusColor">#FFFFD180</Color>
+    <Color x:Key="AccentHoverColor">#FFFFD180</Color>
+    <Color x:Key="AccentPressedColor">#FFFF9100</Color>
+
+    <!-- Brush -->
+    <SolidColorBrush x:Key="PrimaryColorBrush" Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="PrimaryNormalColorBrush" Color="{StaticResource PrimaryNormalColor}"/>
+    <SolidColorBrush x:Key="PrimaryFocusBrush" Color="{StaticResource PrimaryFocusColor}"/>
+    <SolidColorBrush x:Key="PrimaryHoverColorBrush" Color="{StaticResource PrimaryHoverColor}"/>
+    <SolidColorBrush x:Key="PrimaryPressedColorBrush" Color="{StaticResource PrimaryPressedColor}"/>
+
+    <!-- Font -->
+    <system:Double  x:Key="FontSize">14</system:Double>
+    <system:Double x:Key="FontSizeS">12</system:Double>
+    <system:Double x:Key="FontSizeL">18</system:Double>
+    <FontFamily x:Key="FontFamily">Roboto</FontFamily>
+
+    <!-- Misc -->
+    <Duration x:Key="Control_AnimationDuration">0:0:0.5</Duration>
+    <system:Double x:Key="RippleOpacity">1</system:Double>
+
+    <Thickness x:Key="BorderThickness">2</Thickness>
+    <Thickness x:Key="BorderThicknessHover">3</Thickness>
+    <Thickness x:Key="BorderThicknessPressed">4</Thickness>
+
+    <!-- Geometry  -->
+    <Geometry x:Key="AlertIcon">M4,25 C6.2,25 8,26.8 8,29 8,31.2 6.2,33 4,33 1.8,33 0,31.2 0,29 0,26.8 1.8,25 4,25 z M0.5,0 L7.5,0 6.5,22 1.5,22 z</Geometry>
+    <Geometry x:Key="ConfirmIcon">M7.7,17.9 C9.1,17.9 10.2,19 10.2,20.4 C10.2,21.7 9.1,22.8 7.7,22.8 C6.4,22.8 5.3,21.7 5.3,20.4 C5.3,19 6.4,17.9 7.7,17.9 z M7.6,0 C9,0 10.3,0.2 11.3,0.6 C12.3,1 13,1.5 13.7,2.1 C14.3,2.7 14.7,3.3 14.9,4 C15.2,4.7 15.3,5.4 15.3,6 C15.3,7 15.2,7.8 14.9,8.4 C14.7,9.1 14.4,9.6 14,10.1 C13.6,10.6 13.2,11 12.7,11.3 C12.2,11.6 11.8,11.9 11.4,12.2 C11,12.6 10.6,12.9 10.3,13.4 C9.9,13.8 9.7,14.3 9.6,14.9 L9.6,16.1 L5.4,16.1 L5.4,14.7 C5.5,13.8 5.7,13.1 5.9,12.5 C6.2,11.8 6.5,11.3 6.9,10.9 C7.3,10.5 7.7,10.1 8.1,9.8 C8.5,9.5 8.9,9.2 9.3,8.9 C9.6,8.5 9.9,8.2 10.1,7.8 C10.4,7.5 10.5,7 10.4,6.4 C10.4,5.5 10.2,4.8 9.7,4.3 C9.3,3.8 8.6,3.6 7.8,3.6 C7.2,3.6 6.7,3.7 6.3,3.9 C5.9,4.2 5.6,4.4 5.3,4.8 C5.1,5.2 4.9,5.6 4.7,6.1 C4.6,6.6 4.5,7.1 4.5,7.7 L0,7.7 C0,6.5 0.2,5.5 0.5,4.6 C0.9,3.6 1.4,2.8 2.1,2.1 C2.7,1.4 3.5,0.9 4.4,0.5 C5.4,0.1 6.4,0 7.6,0 z</Geometry>
+    <Geometry x:Key="MinimizeIcon">M0,0 L10,0 L10,2 L0,2 z</Geometry>
+    <Geometry x:Key="RestoreIcon">M1,5 L1,9 L7,9 L7,5 z M3,2 L3,3 L8,3 L8,6 L9,6 L9,2 z M2,0 L10,0 L10,7 L8,7 L8,10 L0,10 L0,3 L2,3 z</Geometry>
+    <Geometry x:Key="MaximizeIcon">M0,0 L10,0 10,10 0,10 z M1,3 L9,3 9,9 1,9 z</Geometry>
+
+</ResourceDictionary>
