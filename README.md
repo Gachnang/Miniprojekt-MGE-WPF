@@ -19,8 +19,6 @@ Die Projekte in der Solution:
  
 Setzen Sie diesen Code in Ihrem Miniprojekt ein, um Zeit und Aufwand zu sparen. Gerne können Sie diesen auch beliebig ergänzen und verändern.
 
-__REST-Server__:
-Der REST-Server für den Datenzugriff ist in nodeJs gelöst und unter [Miniprojekt-Server](https://github.com/HSR-MGE/Miniprojekt-Server) zu finden.
 
 ---
 ## Verwendete NuGet-Packages
