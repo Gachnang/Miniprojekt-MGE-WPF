@@ -25,11 +25,15 @@
     <Color x:Key="AccentPressedColor">#FFFF9100</Color>
 
     <!-- Brush -->
-    <SolidColorBrush x:Key="PrimaryColorBrush" Color="{StaticResource PrimaryColor}"/>
-    <SolidColorBrush x:Key="PrimaryNormalColorBrush" Color="{StaticResource PrimaryNormalColor}"/>
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}"/>
+
+    <SolidColorBrush x:Key="MarkerBrush" Color="{StaticResource MarkerColor}"/>
+
+    <SolidColorBrush x:Key="PrimaryNormalBrush" Color="{StaticResource PrimaryNormalColor}"/>
     <SolidColorBrush x:Key="PrimaryFocusBrush" Color="{StaticResource PrimaryFocusColor}"/>
-    <SolidColorBrush x:Key="PrimaryHoverColorBrush" Color="{StaticResource PrimaryHoverColor}"/>
-    <SolidColorBrush x:Key="PrimaryPressedColorBrush" Color="{StaticResource PrimaryPressedColor}"/>
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}"/>
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryPressedColor}"/>
 
     <!-- Font -->
     <system:Double  x:Key="FontSize">14</system:Double>
@@ -39,11 +43,7 @@
 
     <!-- Misc -->
     <Duration x:Key="Control_AnimationDuration">0:0:0.5</Duration>
-    <system:Double x:Key="RippleOpacity">1</system:Double>
-
     <Thickness x:Key="BorderThickness">2</Thickness>
-    <Thickness x:Key="BorderThicknessHover">3</Thickness>
-    <Thickness x:Key="BorderThicknessPressed">4</Thickness>
 
     <!-- Geometry  -->
     <Geometry x:Key="AlertIcon">M4,25 C6.2,25 8,26.8 8,29 8,31.2 6.2,33 4,33 1.8,33 0,31.2 0,29 0,26.8 1.8,25 4,25 z M0.5,0 L7.5,0 6.5,22 1.5,22 z</Geometry>
@@ -51,5 +51,4 @@
     <Geometry x:Key="MinimizeIcon">M0,0 L10,0 L10,2 L0,2 z</Geometry>
     <Geometry x:Key="RestoreIcon">M1,5 L1,9 L7,9 L7,5 z M3,2 L3,3 L8,3 L8,6 L9,6 L9,2 z M2,0 L10,0 L10,7 L8,7 L8,10 L0,10 L0,3 L2,3 z</Geometry>
     <Geometry x:Key="MaximizeIcon">M0,0 L10,0 10,10 0,10 z M1,3 L9,3 9,9 1,9 z</Geometry>
-
 </ResourceDictionary>

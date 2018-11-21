@@ -5,21 +5,9 @@
     <!-- New Style for the buttons. -->
     <!-- TODO Can we make own properties for Hover-/PressedColor? -->
     <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ControlStyle}">
-        <Setter Property="Background">
-            <Setter.Value>
-                <SolidColorBrush Color="{StaticResource PrimaryNormalColor}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="{StaticResource PrimaryNormalColor}" />
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground">
-            <Setter.Value>
-                <SolidColorBrush Color="{StaticResource PrimaryColor}" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Background" Value="{StaticResource PrimaryNormalBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryNormalBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Padding" Value="16 10 16 9" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -43,10 +31,8 @@
                         <Border x:Name="InnerBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{StaticResource BorderThickness}"
+                                BorderBrush="{StaticResource DividerBrush}"
                                 CornerRadius="{StaticResource Control_InnerBorder_CornerRadius}">
-                            <Border.BorderBrush>
-                                <SolidColorBrush Color="{TemplateBinding Foreground}" />
-                            </Border.BorderBrush>
                             <Grid>
                                 <!-- Canvas to hold "AnimationCircle" (Just because of "ClipToBounds") -->
                                 <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True">
@@ -91,7 +77,10 @@
                                     <!-- "PointerOver" is "MouseOver" in other version? Haven't take effect on my side.. -->
                                     <VisualTransition From="PointerOver" To="Normal" GeneratedDuration="{StaticResource Control_AnimationDuration}" />
                                     <!-- Animation after button was pressed. See "AnimationCircle". -->
-                                    <VisualTransition From="Pressed" To="Any" GeneratedDuration="{StaticResource Control_AnimationDuration}" >
+                                    <VisualTransition 
+                                        From="Pressed" 
+                                        To="Any" 
+                                        GeneratedDuration="{StaticResource Control_AnimationDuration}" >
                                         <Storyboard FillBehavior="HoldEnd">
                                             <DoubleAnimationUsingKeyFrames 
                                                 Storyboard.TargetProperty="RenderTransform.ScaleX" 

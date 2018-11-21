@@ -15,4 +15,5 @@
     <!-- Control details -->
     <CornerRadius x:Key="Control_OuterBorder_CornerRadius">3</CornerRadius>
     <CornerRadius x:Key="Control_InnerBorder_CornerRadius">3</CornerRadius>
+
 </ResourceDictionary>
