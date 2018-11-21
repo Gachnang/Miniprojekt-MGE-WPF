@@ -10,6 +10,7 @@
                 <ResourceDictionary Source = "Theme/System.Windows.xaml"/>
                 <ResourceDictionary Source = "Theme/System.Windows.Control.xaml"/>
                 <ResourceDictionary Source = "Theme/System.Windows.Button.xaml"/>
+                <ResourceDictionary Source = "Theme/System.Windows.TextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

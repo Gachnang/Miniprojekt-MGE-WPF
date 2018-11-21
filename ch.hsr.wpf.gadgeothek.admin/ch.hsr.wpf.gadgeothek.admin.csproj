@@ -102,6 +102,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Page Include="Theme\System.Windows.TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Theme\System.Windows.Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

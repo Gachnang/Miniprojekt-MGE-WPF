@@ -7,5 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <Button Content="Button" HorizontalAlignment="Center" VerticalAlignment="Center" Width="183"/>
+    <StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
+    </StackPanel>
 </Window>
