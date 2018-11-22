@@ -24,6 +24,8 @@
     <Color x:Key="AccentHoverColor">#FFFFD180</Color>
     <Color x:Key="AccentPressedColor">#FFFF9100</Color>
 
+    <Color x:Key="InvalidColor">#FFAA3333</Color>
+
     <!-- Brush -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
     <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}"/>
@@ -44,6 +46,7 @@
     <!-- Misc -->
     <Duration x:Key="Control_AnimationDuration">0:0:0.5</Duration>
     <Thickness x:Key="BorderThickness">2</Thickness>
+    <CornerRadius x:Key="CornerRadius">5</CornerRadius>
 
     <!-- Geometry  -->
     <Geometry x:Key="AlertIcon">M4,25 C6.2,25 8,26.8 8,29 8,31.2 6.2,33 4,33 1.8,33 0,31.2 0,29 0,26.8 1.8,25 4,25 z M0.5,0 L7.5,0 6.5,22 1.5,22 z</Geometry>

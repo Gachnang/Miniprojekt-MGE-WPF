@@ -10,10 +10,12 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="local:ThemeProperties.ShadowDepth" Value="Depth0"/>
+        <Setter Property="local:ThemeProperties.InnerBorderThickness" Value="0"/>
+        <Setter Property="local:ThemeProperties.InnerBorderBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="Transparent" />
+            </Setter.Value>
+        </Setter>
     </Style>
-
-    <!-- Control details -->
-    <CornerRadius x:Key="Control_OuterBorder_CornerRadius">3</CornerRadius>
-    <CornerRadius x:Key="Control_InnerBorder_CornerRadius">3</CornerRadius>
-
 </ResourceDictionary>
