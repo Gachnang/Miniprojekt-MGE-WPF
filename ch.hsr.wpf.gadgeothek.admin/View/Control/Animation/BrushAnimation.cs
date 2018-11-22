@@ -59,7 +59,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Control.Animation {
 
         
         protected override Freezable CreateInstanceCore() {
-            return this; //new BrushAnimation();
+            return new BrushAnimation();
         }
 
         //we must define From and To, AnimationTimeline does not have this properties

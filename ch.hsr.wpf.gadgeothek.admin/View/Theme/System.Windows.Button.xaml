@@ -48,10 +48,15 @@
                                                Fill="{TemplateBinding theme:ThemeProperties.HoverBrush}"
                                                Opacity="0"/>
                                 <Rectangle x:Name="RectanglePressed"
-                                               HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Stretch"
-                                               Fill="{TemplateBinding theme:ThemeProperties.PressedBrush}"
-                                               Opacity="0"/>
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"
+                                           Fill="{TemplateBinding theme:ThemeProperties.PressedBrush}"
+                                           Opacity="0"/>
+                                <Rectangle x:Name="RectangleDisabled"
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"
+                                           Fill="{StaticResource DisabledBrush}"
+                                           Opacity="0"/>
                                 <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True">
                                     <!-- "AnimationCircle" when button was pressed: Shrink instantly and set Opacity to one, then grows back and fade out.  -->
                                     <Ellipse x:Name="AnimationCircle"
@@ -188,8 +193,20 @@
                                     </Storyboard>
                                 </VisualState>
 
-                                <!-- TODO -->
-                                <VisualState x:Name="Disabled" />
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="0:0:0.2"
+                                            FillBehavior="HoldEnd"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="RectangleDisabled"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                     </shadow:Shadow>

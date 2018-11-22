@@ -7,7 +7,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source = "View/Theme/Resources.xaml"/>
-                <ResourceDictionary Source = "View/Control/Shadow/Shadows.xaml"/>
                 <ResourceDictionary Source = "View/Theme/System.Windows.xaml"/>
                 <ResourceDictionary Source = "View/Theme/System.Windows.Control.xaml"/>
                 <ResourceDictionary Source = "View/Theme/System.Windows.Button.xaml"/>

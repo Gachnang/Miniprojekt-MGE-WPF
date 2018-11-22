@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:theme="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Theme"
-                    xmlns:shadow="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow">
+                    xmlns:shadow="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow"
+                    xmlns:animation="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.Animation">
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="SelectionBrush" Value="{StaticResource PrimaryFocusBrush}" />
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
@@ -108,6 +109,11 @@
                                                 <SineEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
+                                        <animation:BrushAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Foreground" 
+                                            Storyboard.TargetName="PART_ContentHost"
+                                            To="{StaticResource DisabledBrush}"/>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="ReadOnly">
@@ -121,6 +127,11 @@
                                                 <SineEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
+                                        <animation:BrushAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Foreground" 
+                                            Storyboard.TargetName="PART_ContentHost"
+                                            To="{StaticResource DisabledBrush}"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
