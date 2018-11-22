@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:theme="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Theme">
+                    xmlns:theme="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Theme"
+                    xmlns:shadow="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow">
     <!-- New Style for the buttons. -->
     <!-- see: https://material.io/design/components/text-fields.html#outlined-text-field -->
     <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ControlStyle}">
@@ -20,7 +21,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <!-- Shadow -->
-                    <theme:Shadow x:Name="Shadow" ShadowDepth="{TemplateBinding theme:ThemeProperties.ShadowDepth}">
+                    <shadow:Shadow x:Name="Shadow" ShadowDepth="{TemplateBinding theme:ThemeProperties.ShadowDepth}">
                         <!-- Border around the button -->
                         <Border x:Name="Border" ClipToBounds="True" Padding="0" Margin="0"
                                 Background="{TemplateBinding Background}"
@@ -191,7 +192,7 @@
                                 <VisualState x:Name="Disabled" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                    </theme:Shadow>
+                    </shadow:Shadow>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

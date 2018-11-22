@@ -55,10 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Theme\Animation\BrushAnimation.cs" />
-    <Compile Include="Theme\Shadow\ShadowDepth.cs" />
-    <Compile Include="Theme\Shadow\Shadow.cs" />
-    <Compile Include="Theme\ThemeProperties.cs" />
+    <Compile Include="View\Control\Animation\BrushAnimation.cs" />
+    <Compile Include="View\Control\Shadow\ShadowDepth.cs" />
+    <Compile Include="View\Control\Shadow\Shadow.cs" />
+    <Compile Include="View\Theme\ThemeProperties.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -71,19 +71,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Theme\Resources.xaml">
+    <Page Include="View\Theme\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\Shadow\Shadows.xaml">
+    <Page Include="View\Control\Shadow\Shadows.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Theme\System.Windows.Control.xaml">
+    <Page Include="View\Theme\System.Windows.Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\System.Windows.xaml">
+    <Page Include="View\Theme\System.Windows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,17 +110,22 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Page Include="Theme\System.Windows.TextBox.xaml">
+    <Page Include="View\Theme\System.Windows.TextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Theme\System.Windows.Button.xaml">
+    <Page Include="View\Theme\System.Windows.Button.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller\" />
+    <Folder Include="Model\" />
+    <Folder Include="View\Control\WatermarkTextBox\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

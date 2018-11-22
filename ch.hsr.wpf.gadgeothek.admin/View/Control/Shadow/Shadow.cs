@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 
-namespace ch.hsr.wpf.gadgeothek.admin.Theme {
+namespace ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow {
     /// <summary>
     ///     Create a predefined Shadow.
     ///     <para>
@@ -50,7 +50,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.Theme {
             // Loads the predefined shadows.
             ResourceDictionary resourceDictionary = new ResourceDictionary {
                 Source = new Uri(
-                    "pack://application:,,,/Theme/Shadow/Shadows.xaml",
+                    "pack://application:,,,/View/Control/Shadow/Shadows.xaml",
                     UriKind.Absolute)
             };
 

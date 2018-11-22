@@ -6,12 +6,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source = "Theme/Resources.xaml"/>
-                <ResourceDictionary Source = "Theme/Shadow/Shadows.xaml"/>
-                <ResourceDictionary Source = "Theme/System.Windows.xaml"/>
-                <ResourceDictionary Source = "Theme/System.Windows.Control.xaml"/>
-                <ResourceDictionary Source = "Theme/System.Windows.Button.xaml"/>
-                <ResourceDictionary Source = "Theme/System.Windows.TextBox.xaml"/>
+                <ResourceDictionary Source = "View/Theme/Resources.xaml"/>
+                <ResourceDictionary Source = "View/Control/Shadow/Shadows.xaml"/>
+                <ResourceDictionary Source = "View/Theme/System.Windows.xaml"/>
+                <ResourceDictionary Source = "View/Theme/System.Windows.Control.xaml"/>
+                <ResourceDictionary Source = "View/Theme/System.Windows.Button.xaml"/>
+                <ResourceDictionary Source = "View/Theme/System.Windows.TextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

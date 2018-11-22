@@ -1,4 +1,4 @@
-﻿namespace ch.hsr.wpf.gadgeothek.admin.Theme {
+﻿namespace ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow {
     /// <summary>
     ///     Enum for <see cref="ShadowDepth" />.
     /// </summary>

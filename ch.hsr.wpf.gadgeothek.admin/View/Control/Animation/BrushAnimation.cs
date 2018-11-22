@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace ch.hsr.wpf.gadgeothek.admin.Theme {
+namespace ch.hsr.wpf.gadgeothek.admin.View.Control.Animation {
     /// <summary>
     /// Animates a Brush to another Brush.
     /// <para>Source: https://stackoverflow.com/questions/8096852/brush-to-brush-animation </para>

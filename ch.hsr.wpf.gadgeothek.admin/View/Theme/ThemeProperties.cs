@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow;
 
-namespace ch.hsr.wpf.gadgeothek.admin.Theme {
+namespace ch.hsr.wpf.gadgeothek.admin.View.Theme {
 
     public class ThemeProperties {
         #region ShadowDepthProperty
