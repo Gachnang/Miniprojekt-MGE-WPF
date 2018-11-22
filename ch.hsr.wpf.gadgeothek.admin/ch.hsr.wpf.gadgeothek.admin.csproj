@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Theme\Animation\BrushAnimation.cs" />
     <Compile Include="Theme\Shadow\ShadowDepth.cs" />
     <Compile Include="Theme\Shadow\Shadow.cs" />
     <Compile Include="Theme\ThemeProperties.cs" />
