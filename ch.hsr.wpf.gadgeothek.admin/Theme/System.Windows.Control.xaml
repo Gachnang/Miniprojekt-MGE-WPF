@@ -15,11 +15,5 @@
         <Setter Property="theme:ThemeProperties.PressedBrush" Value="{StaticResource PrimaryPressedBrush}"/>
         <Setter Property="theme:ThemeProperties.CheckedBrush" Value="{StaticResource PrimaryNormalBrush}"/>
         <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth0"/>
-        <Setter Property="theme:ThemeProperties.InnerBorderThickness" Value="0"/>
-        <Setter Property="theme:ThemeProperties.InnerBorderBrush">
-            <Setter.Value>
-                <SolidColorBrush Color="Transparent" />
-            </Setter.Value>
-        </Setter>
     </Style>
 </ResourceDictionary>
