@@ -3,13 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:theme="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Theme"
         xmlns:local="clr-namespace:ch.hsr.wpf.gadgeothek.admin"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <StackPanel>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"/>
-    </StackPanel>
+    <Grid>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="30,31,0,0"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,110,0,0"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,25,0,0" 
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+    </Grid>
 </Window>
