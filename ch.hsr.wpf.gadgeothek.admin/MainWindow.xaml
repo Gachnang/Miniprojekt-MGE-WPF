@@ -10,7 +10,7 @@
 
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="30,31,0,0"/>
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,110,0,0"/>
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,110,0,0" IsReadOnly="True"/>
         <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,25,0,0" 
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
     </Grid>

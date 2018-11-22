@@ -5,10 +5,10 @@
 
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
         <Setter Property="SelectionBrush" Value="{StaticResource PrimaryFocusBrush}" />
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryNormalBrush}" />
         <Setter Property="Foreground" Value="{StaticResource MarkerBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Padding" Value="8 10 8 9" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize}" />
@@ -17,7 +17,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="theme:ThemeProperties.InnerBorderThickness" Value="2"/>
         <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2"/>
         <!--
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource StaticValidationTooltipTemplate}"/>
@@ -27,70 +26,127 @@
                 <ControlTemplate TargetType="TextBox">
                     <!-- Shadow -->
                     <theme:Shadow x:Name="Shadow" ShadowDepth="{TemplateBinding theme:ThemeProperties.ShadowDepth}">
-                        <!-- OuterBorder (Blue(Default) line around the button) -->
-                    <Border x:Name="OuterBorder"
-                            Background="{TemplateBinding Background}" Padding="0" Margin="0"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="{StaticResource CornerRadius}">
+                        <Grid>
+                            <!-- Border -->
+                            <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{StaticResource CornerRadius}"/>
 
-                        <!-- InnerBorder (White line inside the button) -->
-                        <Border x:Name="InnerBorder" ClipToBounds="True" 
-                                    Padding="0" 
-                                    Margin="{TemplateBinding theme:ThemeProperties.InnerBorderThickness}"
-                                    VerticalAlignment="Stretch"
-                                    HorizontalAlignment="Stretch"
-                                    Background="{StaticResource PrimaryBrush}"
-                                    BorderThickness="0"
-                                    BorderBrush="{StaticResource DividerBrush}"
-                                    CornerRadius="{StaticResource CornerRadius}">
+                            <Border x:Name="BorderFocus"
+                                    Background="Transparent"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{StaticResource PrimaryFocusBrush}"
+                                    CornerRadius="{StaticResource CornerRadius}"
+                                    Opacity="0"/>
+
+                            <Border x:Name="BorderReadonly"
+                                    Background="Transparent"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{StaticResource DisabledBrush}"
+                                    CornerRadius="{StaticResource CornerRadius}"
+                                    Opacity="0"/>
+
+                            <Border x:Name="BorderInvalid"
+                                    Background="Transparent"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{StaticResource InvalidBrush}"
+                                    CornerRadius="{StaticResource CornerRadius}"
+                                    Opacity="0"/>
+
                             <!-- The real Content of the TextBox (The text, x:Name must be "PART_ContentHost" because of behind laying code). -->
                             <ScrollViewer x:Name="PART_ContentHost"
-                                          Margin="{TemplateBinding BorderThickness}"
-                                          Padding="{TemplateBinding Padding}"
-                                          Foreground="{TemplateBinding Foreground}"
-                                          BorderBrush="Transparent"
-                                          BorderThickness="0"
-                                          Background="Transparent"
-                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding BorderThickness}"
+                                      Padding="{TemplateBinding Padding}"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      BorderBrush="Transparent"
+                                      BorderThickness="0"
+                                      Background="Transparent"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
-                            </Border>
-                    </Border>
+                        </Grid>
                         <!-- Animation happens here -->
                         <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <!-- When nothing happens on the button -->
-                                <VisualState x:Name="Normal"/>
-
-                                <!-- When hover on the button -->
-                                <VisualState x:Name="MouseOver"/>
-
-                                <!-- TODO -->
-                                <VisualState x:Name="Disabled" />
-                                <VisualState x:Name="ReadOnly" />
-                            </VisualStateGroup>
                             <VisualStateGroup x:Name="FocusStates">
                                 <VisualState x:Name="Focused">
                                     <Storyboard>
-                                        <ColorAnimation
+                                        <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            Storyboard.TargetName="OuterBorder"
-                                            To="{StaticResource PrimaryFocusColor}"/>
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="BorderFocus"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="Unfocused" >
+                                <VisualState x:Name="Unfocused"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
                                     <Storyboard>
-                                        <ColorAnimation
+                                        <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            Storyboard.TargetName="OuterBorder"
-                                            To="{StaticResource PrimaryColor}"/>
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="BorderFocus"
+                                            To="0">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver"/>
+                                <VisualState x:Name="Disabled"/>
+                                
+                                <VisualState x:Name="ReadOnly">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="BorderReadonly"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
+
+                            <VisualStateGroup x:Name="ValidationStates">
+                                <VisualState x:Name="Valid">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="0">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="InvalidFocused">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="InvalidUnfocused"/>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        </theme:Shadow>
+                    </theme:Shadow>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -110,11 +166,6 @@
                         Value="{Binding RelativeSource=
                               {x:Static RelativeSource.Self},
                               Path=(Validation.Errors).CurrentItem.ErrorContent}" />
-                <Setter Property="BorderBrush">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource InvalidColor}"/>
-                    </Setter.Value>
-                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
