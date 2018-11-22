@@ -3,7 +3,7 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:theme="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Theme">
     <!-- New Style for the buttons. -->
-    <!-- TODO Can we make own properties for Hover-/PressedColor? -->
+    <!-- see: https://material.io/design/components/text-fields.html#outlined-text-field -->
     <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ControlStyle}">
         <Setter Property="Background" Value="{StaticResource PrimaryNormalBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryNormalBrush}" />
@@ -21,13 +21,13 @@
                 <ControlTemplate TargetType="Button">
                     <!-- Shadow -->
                     <theme:Shadow x:Name="Shadow" ShadowDepth="{TemplateBinding theme:ThemeProperties.ShadowDepth}">
-                        <!-- OuterBorder (Blue(Default) line around the button) -->
+                        <!-- OuterBorder line around the button -->
                         <Border x:Name="OuterBorder" ClipToBounds="True" Padding="0" Margin="0"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 CornerRadius="{StaticResource CornerRadius}">
-                            <!-- InnerBorder (White line inside the button) -->
+                            <!-- InnerBorder -->
                             <Border x:Name="InnerBorder" ClipToBounds="True" Padding="0" Margin="0" 
                                     Background="{TemplateBinding Background}"
                                     BorderThickness="{TemplateBinding theme:ThemeProperties.InnerBorderThickness}"
@@ -38,30 +38,38 @@
                                         <VisualBrush.Visual>
                                             <Border Background="{TemplateBinding Background}" Padding="0" Margin="0"
                                                     SnapsToDevicePixels="True"
+                                                    ClipToBounds="True"
                                                     CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor,AncestorType=Border}}"
                                                     Width="{Binding ActualWidth,RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
                                                     Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor,AncestorType=Border}}"/>
                                         </VisualBrush.Visual>
                                     </VisualBrush>
                                 </Border.OpacityMask>
-                                <Grid>
-                                    <!-- Canvas to hold "AnimationCircle" -->
+                                <Grid ClipToBounds="True">
+                                    <!-- "{TemplateBinding}" does not work on animations (Freezeable), so we create Rects for the colors -->
+                                    <Rectangle x:Name="RectangleHover"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               Fill="{TemplateBinding theme:ThemeProperties.HoverBrush}"
+                                               Opacity="0"/>
+                                    <Rectangle x:Name="RectanglePressed"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               Fill="{TemplateBinding theme:ThemeProperties.PressedBrush}"
+                                               Opacity="0"/>
                                     <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True">
                                         <!-- "AnimationCircle" when button was pressed: Shrink instantly and set Opacity to one, then grows back and fade out.  -->
                                         <Ellipse x:Name="AnimationCircle"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"
-                                                 Opacity="0"
-                                                 Width="{TemplateBinding ActualWidth}"
-                                                 Height="{TemplateBinding ActualHeight}"
-                                                 RenderTransformOrigin=".5 .5">
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center"
+                                                     Opacity="0"
+                                                     Width="{TemplateBinding ActualWidth}"
+                                                     Height="{TemplateBinding ActualHeight}"
+                                                     Fill="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                                                     RenderTransformOrigin=".5 .5">
                                             <Ellipse.RenderTransform>
                                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                                             </Ellipse.RenderTransform>
-                                            <!-- Color of the Ellipse is PrimaryNormalColor -->
-                                            <Ellipse.Fill>
-                                                <SolidColorBrush Color="{StaticResource PrimaryNormalColor}" />
-                                            </Ellipse.Fill>
                                         </Ellipse>
                                     </Canvas>
                                     <!-- The real Content of the Button (Normaly the text). -->
@@ -86,8 +94,6 @@
                                     <!-- Set time for the animation -->
                                     <VisualTransition From="Pressed" To="Normal" GeneratedDuration="{StaticResource Control_AnimationDuration}" />
                                     <VisualTransition From="MouseOver" To="Normal" GeneratedDuration="{StaticResource Control_AnimationDuration}" />
-                                    <!-- "PointerOver" is "MouseOver" in other version? Haven't take effect on my side.. -->
-                                    <VisualTransition From="PointerOver" To="Normal" GeneratedDuration="{StaticResource Control_AnimationDuration}" />
                                     <!-- Animation after button was pressed. See "AnimationCircle". -->
                                     <VisualTransition 
                                             From="Pressed" 
@@ -135,31 +141,56 @@
                                 <!-- When nothing happens on the button -->
                                 <VisualState x:Name="Normal">
                                     <Storyboard>
-                                        <ColorAnimation
-                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                Storyboard.TargetName="InnerBorder"
-                                                To="{TemplateBinding Background}" />
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="RectangleHover"
+                                            To="0">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation
+                                            Duration="0:0:0.2"
+                                            FillBehavior="HoldEnd"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="RectanglePressed"
+                                            To="0">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
 
                                 <!-- When hover on the button -->
                                 <VisualState x:Name="MouseOver">
                                     <Storyboard>
-                                        <ColorAnimation
-                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                Storyboard.TargetName="InnerBorder" 
-                                                To="{StaticResource PrimaryHoverColor}" />
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="RectangleHover"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
 
                                 <!-- When the button is pressed -->
                                 <VisualState x:Name="Pressed">
-                                    <Storyboard >
-                                        <ColorAnimation
-                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                Storyboard.TargetName="InnerBorder"
-                                                Duration="0:0:0.2"
-                                                To="{StaticResource PrimaryPressedColor}" />
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="0:0:0.2"
+                                            FillBehavior="HoldEnd"
+                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetName="RectanglePressed"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
 

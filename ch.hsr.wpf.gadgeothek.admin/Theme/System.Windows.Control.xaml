@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Theme">
+                    xmlns:theme="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Theme">
     <Style x:Key="ControlStyle" TargetType="{x:Type Control}">
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -10,9 +10,13 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="local:ThemeProperties.ShadowDepth" Value="Depth0"/>
-        <Setter Property="local:ThemeProperties.InnerBorderThickness" Value="0"/>
-        <Setter Property="local:ThemeProperties.InnerBorderBrush">
+        <Setter Property="theme:ThemeProperties.HoverBrush" Value="{StaticResource PrimaryHoverBrush}"/>
+        <Setter Property="theme:ThemeProperties.FocusBrush" Value="{StaticResource PrimaryFocusBrush}"/>
+        <Setter Property="theme:ThemeProperties.PressedBrush" Value="{StaticResource PrimaryPressedBrush}"/>
+        <Setter Property="theme:ThemeProperties.CheckedBrush" Value="{StaticResource PrimaryNormalBrush}"/>
+        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth0"/>
+        <Setter Property="theme:ThemeProperties.InnerBorderThickness" Value="0"/>
+        <Setter Property="theme:ThemeProperties.InnerBorderBrush">
             <Setter.Value>
                 <SolidColorBrush Color="Transparent" />
             </Setter.Value>
