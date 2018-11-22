@@ -8,9 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="30,31,0,0" IsEnabled="False" />
-        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,110,0,0" IsReadOnly="True" Text="dsdsdsdsdsdssd"/>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="30,31,0,0"
+                IsEnabled="False" />
+        <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,110,0,0" IsReadOnly="True"
+                 Text="dsdsdsdsdsdssd" />
         <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,25,0,0"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"/>
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
     </Grid>
 </Window>

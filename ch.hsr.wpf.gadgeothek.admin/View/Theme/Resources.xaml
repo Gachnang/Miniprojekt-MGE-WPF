@@ -30,24 +30,24 @@
     <Color x:Key="DisabledInvertedColor">#FF4F4F4F</Color>
 
     <!-- Brush -->
-    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
-    <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}"/>
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}" />
 
-    <SolidColorBrush x:Key="MarkerBrush" Color="{StaticResource MarkerColor}"/>
-    <SolidColorBrush x:Key="MarkerInvertedBrush" Color="{StaticResource MarkerInvertedColor}"/>
+    <SolidColorBrush x:Key="MarkerBrush" Color="{StaticResource MarkerColor}" />
+    <SolidColorBrush x:Key="MarkerInvertedBrush" Color="{StaticResource MarkerInvertedColor}" />
 
-    <SolidColorBrush x:Key="PrimaryNormalBrush" Color="{StaticResource PrimaryNormalColor}"/>
-    <SolidColorBrush x:Key="PrimaryFocusBrush" Color="{StaticResource PrimaryFocusColor}"/>
-    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}"/>
-    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryPressedColor}"/>
+    <SolidColorBrush x:Key="PrimaryNormalBrush" Color="{StaticResource PrimaryNormalColor}" />
+    <SolidColorBrush x:Key="PrimaryFocusBrush" Color="{StaticResource PrimaryFocusColor}" />
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource PrimaryHoverColor}" />
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource PrimaryPressedColor}" />
 
-    <SolidColorBrush x:Key="RippleBrush" Color="{StaticResource RippleColor}"/>
-    <SolidColorBrush x:Key="InvalidBrush" Color="{StaticResource InvalidColor}"/>
-    <SolidColorBrush x:Key="DisabledBrush" Color="{StaticResource DisabledColor}"/>
-    <SolidColorBrush x:Key="DisabledInvertedBrush" Color="{StaticResource DisabledInvertedColor}"/>
+    <SolidColorBrush x:Key="RippleBrush" Color="{StaticResource RippleColor}" />
+    <SolidColorBrush x:Key="InvalidBrush" Color="{StaticResource InvalidColor}" />
+    <SolidColorBrush x:Key="DisabledBrush" Color="{StaticResource DisabledColor}" />
+    <SolidColorBrush x:Key="DisabledInvertedBrush" Color="{StaticResource DisabledInvertedColor}" />
 
     <!-- Font -->
-    <system:Double  x:Key="FontSize">14</system:Double>
+    <system:Double x:Key="FontSize">14</system:Double>
     <system:Double x:Key="FontSizeS">12</system:Double>
     <system:Double x:Key="FontSizeL">18</system:Double>
     <FontFamily x:Key="FontFamily">Roboto</FontFamily>
@@ -64,7 +64,7 @@
     <Geometry x:Key="RestoreIcon">M1,5 L1,9 L7,9 L7,5 z M3,2 L3,3 L8,3 L8,6 L9,6 L9,2 z M2,0 L10,0 L10,7 L8,7 L8,10 L0,10 L0,3 L2,3 z</Geometry>
     <Geometry x:Key="MaximizeIcon">M0,0 L10,0 10,10 0,10 z M1,3 L9,3 9,9 1,9 z</Geometry>
 </ResourceDictionary>
-    
+
 <!--
     VisualStateGroups:  https://stackoverflow.com/questions/26653647/change-textbox-foreground-on-focus-in-visualstate
     

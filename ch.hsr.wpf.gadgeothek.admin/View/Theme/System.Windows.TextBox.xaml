@@ -17,7 +17,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2"/>
+        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2" />
         <!--
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource StaticValidationTooltipTemplate}"/>
     -->
@@ -29,41 +29,41 @@
                         <Grid>
                             <!-- Border -->
                             <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                CornerRadius="{StaticResource CornerRadius}"/>
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    CornerRadius="{StaticResource CornerRadius}" />
 
                             <Border x:Name="BorderFocus"
                                     Background="Transparent"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{StaticResource PrimaryFocusBrush}"
                                     CornerRadius="{StaticResource CornerRadius}"
-                                    Opacity="0"/>
+                                    Opacity="0" />
 
                             <Border x:Name="BorderReadonly"
                                     Background="Transparent"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{StaticResource DisabledBrush}"
                                     CornerRadius="{StaticResource CornerRadius}"
-                                    Opacity="0"/>
+                                    Opacity="0" />
 
                             <Border x:Name="BorderInvalid"
                                     Background="Transparent"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{StaticResource InvalidBrush}"
                                     CornerRadius="{StaticResource CornerRadius}"
-                                    Opacity="0"/>
+                                    Opacity="0" />
 
                             <!-- The real Content of the TextBox (The text, x:Name must be "PART_ContentHost" because of behind laying code). -->
                             <ScrollViewer x:Name="PART_ContentHost"
-                                      Margin="{TemplateBinding BorderThickness}"
-                                      Padding="{TemplateBinding Padding}"
-                                      Foreground="{TemplateBinding Foreground}"
-                                      BorderBrush="Transparent"
-                                      BorderThickness="0"
-                                      Background="Transparent"
-                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Margin="{TemplateBinding BorderThickness}"
+                                          Padding="{TemplateBinding Padding}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          BorderBrush="Transparent"
+                                          BorderThickness="0"
+                                          Background="Transparent"
+                                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
                         </Grid>
                         <!-- Animation happens here -->
@@ -73,11 +73,11 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="BorderFocus"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -86,52 +86,52 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="BorderFocus"
                                             To="0">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="Normal" />
                                 <VisualState x:Name="Disabled">
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="BorderReadonly"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <animation:BrushAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Foreground" 
+                                            Storyboard.TargetProperty="Foreground"
                                             Storyboard.TargetName="PART_ContentHost"
-                                            To="{StaticResource DisabledBrush}"/>
+                                            To="{StaticResource DisabledBrush}" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="ReadOnly">
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="BorderReadonly"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <animation:BrushAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Foreground" 
+                                            Storyboard.TargetProperty="Foreground"
                                             Storyboard.TargetName="PART_ContentHost"
-                                            To="{StaticResource DisabledBrush}"/>
+                                            To="{StaticResource DisabledBrush}" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -140,11 +140,11 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="BorderInvalid"
                                             To="0">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -153,27 +153,27 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="BorderInvalid"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="InvalidUnfocused">
                                     <Storyboard>
-                                    <DoubleAnimation
-                                        Duration="{StaticResource Control_AnimationDuration}"
-                                        Storyboard.TargetProperty="Opacity" 
-                                        Storyboard.TargetName="BorderInvalid"
-                                        To="1">
-                                        <DoubleAnimation.EasingFunction>
-                                            <SineEase EasingMode="EaseOut"/>
-                                        </DoubleAnimation.EasingFunction>
-                                    </DoubleAnimation>
-                                        </Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>

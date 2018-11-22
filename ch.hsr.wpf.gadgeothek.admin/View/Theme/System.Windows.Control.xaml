@@ -8,13 +8,13 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="theme:ThemeProperties.HoverBrush" Value="{StaticResource PrimaryHoverBrush}"/>
-        <Setter Property="theme:ThemeProperties.FocusBrush" Value="{StaticResource PrimaryFocusBrush}"/>
-        <Setter Property="theme:ThemeProperties.PressedBrush" Value="{StaticResource PrimaryPressedBrush}"/>
-        <Setter Property="theme:ThemeProperties.CheckedBrush" Value="{StaticResource PrimaryNormalBrush}"/>
-        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth0"/>
-        <Setter Property="theme:ThemeProperties.RippleBrush" Value="{StaticResource RippleBrush}"/>
+        <Setter Property="theme:ThemeProperties.HoverBrush" Value="{StaticResource PrimaryHoverBrush}" />
+        <Setter Property="theme:ThemeProperties.FocusBrush" Value="{StaticResource PrimaryFocusBrush}" />
+        <Setter Property="theme:ThemeProperties.PressedBrush" Value="{StaticResource PrimaryPressedBrush}" />
+        <Setter Property="theme:ThemeProperties.CheckedBrush" Value="{StaticResource PrimaryNormalBrush}" />
+        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth0" />
+        <Setter Property="theme:ThemeProperties.RippleBrush" Value="{StaticResource RippleBrush}" />
     </Style>
 </ResourceDictionary>

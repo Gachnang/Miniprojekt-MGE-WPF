@@ -31,7 +31,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow {
                 new FrameworkPropertyMetadata(40d));
 
         /// <summary>
-        ///     Identifies the <see cref="ShadowDepth" /> dependency property. 
+        ///     Identifies the <see cref="ShadowDepth" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty ShadowDepthProperty =
             DependencyProperty.Register("ShadowDepth", typeof(ShadowDepth), typeof(Shadow),

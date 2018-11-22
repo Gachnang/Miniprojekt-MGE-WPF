@@ -6,17 +6,17 @@
     <!-- New Style for the buttons. -->
     <!-- see: https://material.io/design/components/text-fields.html#outlined-text-field -->
     <Style x:Key="ButtonStyle" TargetType="Button" BasedOn="{StaticResource ControlStyle}">
-        <Setter Property="Background" Value="{StaticResource PrimaryNormalBrush}"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryNormalBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryNormalBrush}" />
         <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="16 10 16 9" />
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="MinHeight" Value="22" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize}" />
-        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2"/>
+        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -29,44 +29,44 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 CornerRadius="{StaticResource CornerRadius}">
                             <Border.OpacityMask>
-                                    <VisualBrush>
-                                        <VisualBrush.Visual>
-                                            <Border Background="{TemplateBinding Background}" Padding="0" Margin="0"
-                                                    SnapsToDevicePixels="True"
-                                                    ClipToBounds="True"
-                                                    CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor,AncestorType=Border}}"
-                                                    Width="{Binding ActualWidth,RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
-                                                    Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor,AncestorType=Border}}"/>
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Border.OpacityMask>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Border Background="{TemplateBinding Background}" Padding="0" Margin="0"
+                                                SnapsToDevicePixels="True"
+                                                ClipToBounds="True"
+                                                CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource FindAncestor,AncestorType=Border}}"
+                                                Width="{Binding ActualWidth,RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}"
+                                                Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor,AncestorType=Border}}" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Border.OpacityMask>
                             <Grid ClipToBounds="True">
                                 <!-- "{TemplateBinding}" does not work on animations (Freezeable), so we create Rects for the colors -->
                                 <Rectangle x:Name="RectangleHover"
-                                               HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Stretch"
-                                               Fill="{TemplateBinding theme:ThemeProperties.HoverBrush}"
-                                               Opacity="0"/>
+                                           HorizontalAlignment="Stretch"
+                                           VerticalAlignment="Stretch"
+                                           Fill="{TemplateBinding theme:ThemeProperties.HoverBrush}"
+                                           Opacity="0" />
                                 <Rectangle x:Name="RectanglePressed"
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"
                                            Fill="{TemplateBinding theme:ThemeProperties.PressedBrush}"
-                                           Opacity="0"/>
+                                           Opacity="0" />
                                 <Rectangle x:Name="RectangleDisabled"
                                            HorizontalAlignment="Stretch"
                                            VerticalAlignment="Stretch"
                                            Fill="{StaticResource DisabledBrush}"
-                                           Opacity="0"/>
+                                           Opacity="0" />
                                 <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True">
                                     <!-- "AnimationCircle" when button was pressed: Shrink instantly and set Opacity to one, then grows back and fade out.  -->
                                     <Ellipse x:Name="AnimationCircle"
-                                                     HorizontalAlignment="Center"
-                                                     VerticalAlignment="Center"
-                                                     Opacity="0"
-                                                     Width="{TemplateBinding ActualWidth}"
-                                                     Height="{TemplateBinding ActualHeight}"
-                                                     Fill="{TemplateBinding theme:ThemeProperties.RippleBrush}"
-                                                     RenderTransformOrigin=".5 .5">
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Opacity="0"
+                                             Width="{TemplateBinding ActualWidth}"
+                                             Height="{TemplateBinding ActualHeight}"
+                                             Fill="{TemplateBinding theme:ThemeProperties.RippleBrush}"
+                                             RenderTransformOrigin=".5 .5">
                                         <Ellipse.RenderTransform>
                                             <ScaleTransform ScaleX="2" ScaleY="2" />
                                         </Ellipse.RenderTransform>
@@ -85,48 +85,50 @@
                                                 Content="{TemplateBinding Content}"
                                                 ContentTemplate="{TemplateBinding ContentTemplate}" />
                             </Grid>
-                        </Border> 
+                        </Border>
                         <!-- Animation happens here -->
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualStateGroup.Transitions>
                                     <!-- Set time for the animation -->
-                                    <VisualTransition From="Pressed" To="Normal" GeneratedDuration="{StaticResource Control_AnimationDuration}" />
-                                    <VisualTransition From="MouseOver" To="Normal" GeneratedDuration="{StaticResource Control_AnimationDuration}" />
+                                    <VisualTransition From="Pressed" To="Normal"
+                                                      GeneratedDuration="{StaticResource Control_AnimationDuration}" />
+                                    <VisualTransition From="MouseOver" To="Normal"
+                                                      GeneratedDuration="{StaticResource Control_AnimationDuration}" />
                                     <!-- Animation after button was pressed. See "AnimationCircle". -->
-                                    <VisualTransition 
-                                            From="Pressed" 
-                                            To="Any" 
-                                            GeneratedDuration="{StaticResource Control_AnimationDuration}" >
+                                    <VisualTransition
+                                        From="Pressed"
+                                        To="Any"
+                                        GeneratedDuration="{StaticResource Control_AnimationDuration}">
                                         <Storyboard FillBehavior="HoldEnd">
-                                            <DoubleAnimationUsingKeyFrames 
-                                                    Storyboard.TargetProperty="RenderTransform.ScaleX" 
-                                                    Storyboard.TargetName="AnimationCircle"
-                                                    FillBehavior="HoldEnd">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <DoubleAnimationUsingKeyFrames
+                                                Storyboard.TargetProperty="RenderTransform.ScaleX"
+                                                Storyboard.TargetName="AnimationCircle"
+                                                FillBehavior="HoldEnd">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
                                                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <SineEase EasingMode="EaseIn" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames 
-                                                    Storyboard.TargetProperty="RenderTransform.ScaleY" 
-                                                    Storyboard.TargetName="AnimationCircle"
-                                                    FillBehavior="HoldEnd">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <DoubleAnimationUsingKeyFrames
+                                                Storyboard.TargetProperty="RenderTransform.ScaleY"
+                                                Storyboard.TargetName="AnimationCircle"
+                                                FillBehavior="HoldEnd">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0" />
                                                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <SineEase EasingMode="EaseIn" />
                                                     </EasingDoubleKeyFrame.EasingFunction>
                                                 </EasingDoubleKeyFrame>
                                             </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames 
-                                                    Storyboard.TargetProperty="Opacity" 
-                                                    Storyboard.TargetName="AnimationCircle"
-                                                    FillBehavior="HoldEnd">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+                                            <DoubleAnimationUsingKeyFrames
+                                                Storyboard.TargetProperty="Opacity"
+                                                Storyboard.TargetName="AnimationCircle"
+                                                FillBehavior="HoldEnd">
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
                                                 <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0">
                                                     <EasingDoubleKeyFrame.EasingFunction>
                                                         <SineEase EasingMode="EaseIn" />
@@ -142,21 +144,21 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="RectangleHover"
                                             To="0">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation
                                             Duration="0:0:0.2"
                                             FillBehavior="HoldEnd"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="RectanglePressed"
                                             To="0">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut"/>
+                                                <SineEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -167,11 +169,11 @@
                                     <Storyboard>
                                         <DoubleAnimation
                                             Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="RectangleHover"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseIn"/>
+                                                <SineEase EasingMode="EaseIn" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -183,11 +185,11 @@
                                         <DoubleAnimation
                                             Duration="0:0:0.2"
                                             FillBehavior="HoldEnd"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="RectanglePressed"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseIn"/>
+                                                <SineEase EasingMode="EaseIn" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -198,11 +200,11 @@
                                         <DoubleAnimation
                                             Duration="0:0:0.2"
                                             FillBehavior="HoldEnd"
-                                            Storyboard.TargetProperty="Opacity" 
+                                            Storyboard.TargetProperty="Opacity"
                                             Storyboard.TargetName="RectangleDisabled"
                                             To="1">
                                             <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseIn"/>
+                                                <SineEase EasingMode="EaseIn" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
