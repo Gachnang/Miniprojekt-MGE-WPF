@@ -31,9 +31,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.Theme {
                 new FrameworkPropertyMetadata(40d));
 
         /// <summary>
-        ///     Identifies the <see cref="ShadowDepth" /> dependency property.
-        ///     Default Value: <see cref="MaterialCch.hsr.wpf.gadgeothek.admin.Theme.Shadow.ShadowDepth>.
-        /// 
+        ///     Identifies the <see cref="ShadowDepth" /> dependency property. 
         /// </summary>
         public static readonly DependencyProperty ShadowDepthProperty =
             DependencyProperty.Register("ShadowDepth", typeof(ShadowDepth), typeof(Shadow),
@@ -53,7 +51,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.Theme {
             ResourceDictionary resourceDictionary = new ResourceDictionary {
                 Source = new Uri(
                     "pack://application:,,,/Theme/Shadow/Shadows.xaml",
-                    UriKind.RelativeOrAbsolute)
+                    UriKind.Absolute)
             };
 
             shadowsDictionary = new Dictionary<ShadowDepth, DropShadowEffect> {

@@ -59,7 +59,7 @@
                                                      Opacity="0"
                                                      Width="{TemplateBinding ActualWidth}"
                                                      Height="{TemplateBinding ActualHeight}"
-                                                     Fill="{Binding Path=BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                                                     Fill="{TemplateBinding theme:ThemeProperties.RippleBrush}"
                                                      RenderTransformOrigin=".5 .5">
                                         <Ellipse.RenderTransform>
                                             <ScaleTransform ScaleX="2" ScaleY="2" />
