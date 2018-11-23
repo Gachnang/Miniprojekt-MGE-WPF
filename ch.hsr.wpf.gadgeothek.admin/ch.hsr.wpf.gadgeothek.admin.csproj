@@ -58,6 +58,8 @@
     <Compile Include="View\Control\Animation\BrushAnimation.cs" />
     <Compile Include="View\Control\Shadow\ShadowDepth.cs" />
     <Compile Include="View\Control\Shadow\Shadow.cs" />
+    <Compile Include="View\Control\WatermarkTextBox\WatermarkBehavior.cs" />
+    <Compile Include="View\Control\WatermarkTextBox\WatermarkTextBox.cs" />
     <Compile Include="View\Theme\ThemeProperties.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +73,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Control\WatermarkTextBox\WatermarkTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Theme\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,7 +131,6 @@
   <ItemGroup>
     <Folder Include="Controller\" />
     <Folder Include="Model\" />
-    <Folder Include="View\Control\WatermarkTextBox\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

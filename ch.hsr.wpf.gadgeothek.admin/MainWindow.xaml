@@ -4,15 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ch.hsr.wpf.gadgeothek.admin"
+        xmlns:watermarkTextBox="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.WatermarkTextBox"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="30,31,0,0"
-                IsEnabled="False" />
+                IsEnabled="true" />
         <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,110,0,0" IsReadOnly="True"
                  Text="dsdsdsdsdsdssd" />
         <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="270,25,0,0"
                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+        <watermarkTextBox:WatermarkTextBox  HorizontalAlignment="Left" VerticalAlignment="Top"  Width="200" Margin="30,110,0,0" WatermarkContent="Label"/>
     </Grid>
 </Window>
