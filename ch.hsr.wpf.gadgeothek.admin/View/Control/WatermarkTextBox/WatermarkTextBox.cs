@@ -4,6 +4,13 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace ch.hsr.wpf.gadgeothek.admin.View.Control.WatermarkTextBox {
+    /// <summary>
+    /// A TextBox with a Watermark (Placeholder/Label).
+    /// <para>
+    /// I could not figure out how to calcualte / Bind the distance the Watermark has to move when <see cref="WatermarkBehavior"/> is MoveOnFocus.
+    /// It is HardCoded! A change of Margin / Padding / Aligment will have wrong behavior!!
+    /// </para>
+    /// </summary>
     class WatermarkTextBox : TextBox
     {
         /// <summary>
@@ -176,6 +183,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Control.WatermarkTextBox {
             {
                 this.SetCurrentValue(TextProperty, this._textPreInitValue);
             }
+
         }
 
         private static void OnIsWatermarkVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -213,6 +221,10 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Control.WatermarkTextBox {
             {
                 this.IsWatermarkVisible = false;
             }
+            if (this.WatermarkBehavior == WatermarkBehavior.MoveWhenFocused)
+            {
+                this.IsWatermarkMoved = true;
+            }
         }
 
         private void OnLostFocus(object sender, RoutedEventArgs e)
@@ -240,18 +252,17 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Control.WatermarkTextBox {
                 this.IsWatermarkVisible = string.IsNullOrEmpty(this.CurrentText);
             } else {
                 this.IsWatermarkVisible = true;
-                this.IsWatermarkMoved = this.IsKeyboardFocusWithin;
+                this.IsWatermarkMoved = !string.IsNullOrEmpty(this.CurrentText) || this.IsKeyboardFocusWithin;
             }
         }
 
         private void UpdateVisualState(bool useTransitions)
         {
-            if (this.IsWatermarkVisible)
-            {
+            if (this.IsWatermarkMoved) {
+                VisualStateManager.GoToState(this, WatermarkMovedState, useTransitions);
+            } else if (this.IsWatermarkVisible) {
                 VisualStateManager.GoToState(this, WatermarkVisibleState, useTransitions);
-            }
-            else
-            {
+            } else {
                 VisualStateManager.GoToState(this, WatermarkHiddenState, useTransitions);
             }
         }
