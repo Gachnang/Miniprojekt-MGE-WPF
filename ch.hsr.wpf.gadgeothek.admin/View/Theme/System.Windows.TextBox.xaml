@@ -17,10 +17,11 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="AllowDrop" Value="True" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
+        <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2" />
-        <!--
-    <Setter Property="Validation.ErrorTemplate" Value="{StaticResource StaticValidationTooltipTemplate}"/>
-    -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -46,7 +47,7 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     BorderBrush="{StaticResource DisabledBrush}"
                                     CornerRadius="{StaticResource CornerRadius}"
-                                    Opacity="0" />
+                                    Visibility="Collapsed" />
 
                             <Border x:Name="BorderInvalid"
                                     Background="Transparent"
@@ -66,121 +67,90 @@
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
                         </Grid>
-                        <!-- Animation happens here -->
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="FocusStates">
-                                <VisualState x:Name="Focused">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderFocus"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Unfocused">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderFocus"
-                                            To="0">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderReadonly"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <animation:BrushAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Foreground"
-                                            Storyboard.TargetName="PART_ContentHost"
-                                            To="{StaticResource DisabledBrush}" />
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="ReadOnly">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderReadonly"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <animation:BrushAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Foreground"
-                                            Storyboard.TargetName="PART_ContentHost"
-                                            To="{StaticResource DisabledBrush}" />
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup x:Name="ValidationStates">
-                                <VisualState x:Name="Valid">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderInvalid"
-                                            To="0">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="InvalidFocused">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderInvalid"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="InvalidUnfocused">
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderInvalid"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                     </shadow:Shadow>
+
+                    <!-- Animation happens here -->
+                    <ControlTemplate.Triggers>
+                        <!-- readOnly -->
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource SecondaryOpacity}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource DisabledOpacity}" />
+                        </Trigger>
+                        <!-- Focus -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderFocus"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderFocus"
+                                            To="0">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <!-- Validation -->
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="1">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="0">
+                                            <DoubleAnimation.EasingFunction>
+                                                <SineEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <!-- Just override the default ErrorTemplate -->
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
                 <ControlTemplate>
@@ -190,6 +160,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <!-- Add ErrorContent to the tooltip -->
         <Style.Triggers>
             <Trigger Property="Validation.HasError"
                      Value="True">
@@ -200,6 +171,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
     <!-- Apply the "TextBoxStyle" on every button. -->
     <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxStyle}" />
 
