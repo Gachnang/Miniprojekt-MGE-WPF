@@ -76,11 +76,13 @@
                         <!-- readOnly -->
                         <Trigger Property="IsReadOnly" Value="True">
                             <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource SecondaryOpacity}" />
+                            <Setter TargetName="PART_ContentHost" Property="Opacity"
+                                    Value="{StaticResource SecondaryOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource DisabledOpacity}" />
+                            <Setter TargetName="PART_ContentHost" Property="Opacity"
+                                    Value="{StaticResource DisabledOpacity}" />
                         </Trigger>
                         <!-- Focus -->
                         <Trigger Property="IsKeyboardFocused" Value="True">
