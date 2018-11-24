@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using ch.hsr.wpf.gadgeothek.admin.Annotations;
 using ch.hsr.wpf.gadgeothek.domain;
 using ch.hsr.wpf.gadgeothek.service;
 using ch.hsr.wpf.gadgeothek.websocket;
 
 namespace ch.hsr.wpf.gadgeothek.admin.Model
 {
-    public class GadgeothekRepository : IDisposable {
+    public class GadgeothekRepository : IDisposable, INotifyPropertyChanged {
         private static GadgeothekRepository _instance;
         private static String DefaultServerUrl = "http://localhost:8080";
         private LibraryAdminService _libraryService;
@@ -87,6 +90,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _loans.Add(loan);
                         break;
                 }
+
+                OnPropertyChanged("Loans");
             } else if (eventArgs.Notification.Target == typeof(Gadget).Name.ToLower()) {
                 Gadget gadget = eventArgs.Notification.DataAs<Gadget>();
 
@@ -105,6 +110,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _gadgets.Add(gadget);
                         break;
                 }
+
+                OnPropertyChanged("Gadgets");
             } else if (eventArgs.Notification.Target == typeof(Reservation).Name.ToLower()) {
                 Reservation reservation = eventArgs.Notification.DataAs<Reservation>();
 
@@ -123,26 +130,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _reservations.Add(reservation);
                         break;
                 }
-            }
-            else if (eventArgs.Notification.Target == typeof(Reservation).Name.ToLower())
-            {
-                Reservation reservation = eventArgs.Notification.DataAs<Reservation>();
 
-                switch (eventArgs.Notification.Type)
-                {
-                    case WebSocketClientNotificationTypeEnum.Add:
-                        _reservations.Add(reservation);
-                        break;
-                    case WebSocketClientNotificationTypeEnum.Delete:
-                        _reservations.Remove(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
-                        break;
-                    case WebSocketClientNotificationTypeEnum.Update:
-                        // PropertyChangedEvent will not work because of missing INotifyPropertyChanged, we remove and add item.
-                        // It's not great, but will work.
-                        _reservations.Remove(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
-                        _reservations.Add(reservation);
-                        break;
-                }
+                OnPropertyChanged("Reservations");
             }
             else if (eventArgs.Notification.Target == typeof(Customer).Name.ToLower())
             {
@@ -163,6 +152,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _customers.Add(customer);
                         break;
                 }
+
+                OnPropertyChanged("Customers");
             } else {
                 throw new EvaluateException("Could not figure out, which data changed..\nValue=" + eventArgs.Notification.Target);
             }
@@ -198,6 +189,13 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
             _customers?.Clear();
             _gadgets?.Clear();
             _reservations?.Clear();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
