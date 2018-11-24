@@ -1,50 +1,45 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
+using ch.hsr.wpf.gadgeothek.admin.Annotations;
+using ch.hsr.wpf.gadgeothek.admin.Model;
+using ch.hsr.wpf.gadgeothek.domain;
 
 namespace ch.hsr.wpf.gadgeothek.admin {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        private ExampleViewModel m_ViewModel;
+        private GadgeothekRepository _repository;
+        public Collection<Gadget> Gadgets => _repository.Gadgets;
+        public Gadget SelectedGadget => Selector.SelectedItem as Gadget;
 
         public MainWindow() {
             InitializeComponent();
-            m_ViewModel = new ExampleViewModel();
-            DataContext = m_ViewModel;
-        }
-    }
 
+            _repository = GadgeothekRepository.GetInstance();
+            _repository.Open();
 
-    public class ExampleViewModel : INotifyPropertyChanged {
-        private string m_Name = "Type Here";
-
-        public string Name {
-            get => m_Name;
-            set {
-                if (string.IsNullOrEmpty(value)) {
-                    throw new Exception("Name can not be empty.");
-                }
-
-                if (value.Length > 12) {
-                    throw new Exception("name can not be longer than 12 characters");
-                }
-
-                if (m_Name != value) {
-                    m_Name = value;
-                    OnPropertyChanged("Name");
-                }
-            }
+            DataContext = this;
         }
 
+        private void BtnSave_OnClick(object sender, RoutedEventArgs e) {
+            _repository.SetGadget(new Gadget() {
+                Name = WtbName.Text,
+                Manufacturer = WtbManufacturer.Text,
+                InventoryNumber = WtbInventoryNumber.Text
+            });
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName) {
-            if (PropertyChanged != null) {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            WtbInventoryNumber.Text = SelectedGadget.InventoryNumber;
+            WtbManufacturer.Text = SelectedGadget.Manufacturer;
+            WtbName.Text = SelectedGadget.Name;
         }
     }
 }
