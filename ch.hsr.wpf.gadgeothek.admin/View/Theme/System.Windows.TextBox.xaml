@@ -10,6 +10,7 @@
         <Setter Property="Foreground" Value="{StaticResource MarkerBrush}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Padding" Value="8 10 8 9" />
+        <Setter Property="MinHeight" Value="40" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize}" />
         <Setter Property="CaretBrush" Value="{StaticResource MarkerBrush}" />
@@ -19,9 +20,10 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="AllowDrop" Value="True" />
         <Setter Property="IsTabStop" Value="True" />
+
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2" />
+        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">

@@ -50,7 +50,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow {
             // Loads the predefined shadows.
             ResourceDictionary resourceDictionary = new ResourceDictionary {
                 Source = new Uri(
-                    "pack://application:,,,/View/Control/Shadow/Shadows.xaml",
+                    "pack://application:,,,/ch.hsr.wpf.gadgeothek.admin;component/View/Control/Shadow/Shadows.xaml",
                     UriKind.Absolute)
             };
 

@@ -16,7 +16,7 @@
         <Setter Property="MinHeight" Value="22" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize}" />
-        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth2" />
+        <Setter Property="theme:ThemeProperties.ShadowDepth" Value="Depth1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

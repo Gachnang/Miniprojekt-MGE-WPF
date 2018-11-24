@@ -59,7 +59,9 @@
     <Compile Include="View\Control\Shadow\ShadowDepth.cs" />
     <Compile Include="View\Control\Shadow\Shadow.cs" />
     <Compile Include="View\Control\WatermarkTextBox\WatermarkBehavior.cs" />
-    <Compile Include="View\Control\WatermarkTextBox\WatermarkTextBox.cs" />
+    <Compile Include="View\Control\WatermarkTextBox\WatermarkTextBox.cs">
+      <DependentUpon>WatermarkTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Theme\ThemeProperties.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -74,17 +76,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Control\WatermarkTextBox\WatermarkTextBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Theme\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Control\Shadow\Shadows.xaml">
+    <Resource Include="View\Theme\Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="View\Control\Shadow\Shadows.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </Resource>
     <Page Include="View\Theme\System.Windows.Control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

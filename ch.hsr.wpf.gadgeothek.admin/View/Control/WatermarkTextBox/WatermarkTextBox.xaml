@@ -5,13 +5,241 @@
                     xmlns:shadow="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.Shadow"
                     xmlns:animation="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.Animation">
 
-    <Style x:Key="WatermarkTextBoxStyle" TargetType="wtb:WatermarkTextBox">
+    <ControlTemplate x:Key="WatermarkTextBoxTemplate" TargetType="{x:Type wtb:WatermarkTextBox}">
+        <shadow:Shadow x:Name="Shadow" ShadowDepth="{TemplateBinding theme:ThemeProperties.ShadowDepth}">
+            <Grid>
+                <!-- Border -->
+                <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{StaticResource CornerRadius}" />
+
+                <Border x:Name="BorderFocus"
+                                Background="Transparent"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding theme:ThemeProperties.FocusBrush}"
+                                CornerRadius="{StaticResource CornerRadius}"
+                                Opacity="0" />
+
+                <Border x:Name="BorderReadonly"
+                                Background="Transparent"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{StaticResource DisabledBrush}"
+                                CornerRadius="{StaticResource CornerRadius}"
+                                Visibility="Collapsed" />
+
+                <Border x:Name="BorderInvalid"
+                                Background="Transparent"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{StaticResource InvalidBrush}"
+                                CornerRadius="{StaticResource CornerRadius}"
+                                Opacity="0" />
+
+                <!-- The real Content of the TextBox (The text, x:Name must be "PART_ContentHost" because of behind laying code). -->
+                <ScrollViewer x:Name="PART_ContentHost"
+                                Background="Transparent"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                BorderThickness="0" 
+                                IsTabStop="False"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                  Foreground="{TemplateBinding Foreground}"
+                                  BorderBrush="Transparent" />
+                <!-- Watermark -->
+                <ContentControl x:Name="Watermark" 
+                                        IsTabStop="False"
+                                        FontStyle="Italic"
+                                        Content="{TemplateBinding WatermarkContent}"
+                                        ContentTemplate="{TemplateBinding WatermarkTemplate}"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Left"
+                                        IsHitTestVisible="False"
+                                        Margin="{TemplateBinding Padding}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Padding="{TemplateBinding BorderThickness}"
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="0"
+                                        Visibility="Hidden">
+                    <ContentControl.RenderTransform>
+                        <!-- Empty RenderTransform for move -->
+                        <TranslateTransform/>
+                    </ContentControl.RenderTransform>
+                    <ContentControl.Template>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                                                BorderBrush="Transparent"
+                                                CornerRadius="{StaticResource CornerRadius}">
+                                <Border.Background>
+                                    <!-- Makes the border disapear.. -->
+                                    <LinearGradientBrush
+                                                    StartPoint="0.5, 0"
+                                                    EndPoint="0.5, 1">
+                                        <GradientStop Offset="0.75" Color="Transparent"/>
+                                        <GradientStop Offset="0.6" Color="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background.(SolidColorBrush.Color)}" />
+                                        <GradientStop Offset="0.4" Color="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background.(SolidColorBrush.Color)}"/>
+                                        <GradientStop Offset="0.25" Color="Transparent"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                              Opacity="{StaticResource SecondaryOpacity}"/>
+                            </Border>
+                        </ControlTemplate>
+                    </ContentControl.Template>
+                </ContentControl>
+            </Grid>
+
+        </shadow:Shadow>
+
+        <!-- Animation happens here -->
+        <ControlTemplate.Triggers>
+
+            <!-- ReadOnly -->
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource SecondaryOpacity}" />
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource DisabledOpacity}" />
+                <Setter TargetName="Watermark" Property="Opacity" Value="{StaticResource DisabledOpacity}" />
+            </Trigger>
+
+            <!-- Focus -->
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderFocus"
+                                            To="1">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderFocus"
+                                            To="0">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <!-- Validation -->
+            <Trigger Property="Validation.HasError" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="1">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            Storyboard.TargetProperty="Opacity"
+                                            Storyboard.TargetName="BorderInvalid"
+                                            To="0">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+
+            <!-- Watermark -->
+            <Trigger Property="IsWatermarkVisible" Value="True">
+                <Setter TargetName="Watermark" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="IsWatermarkMoved" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation 
+                                            Storyboard.TargetName="Watermark"
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            To="-20">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseIn" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation 
+                                            Storyboard.TargetName="Watermark"
+                                            Storyboard.TargetProperty="FontSize"
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            By="-2">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseIn" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation 
+                                            Storyboard.TargetName="Watermark"
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            To="0">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation 
+                                            Storyboard.TargetName="Watermark"
+                                            Storyboard.TargetProperty="FontSize"
+                                            Duration="{StaticResource Control_AnimationDuration}"
+                                            By="2">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="WatermarkTextBoxStyle" TargetType="{x:Type wtb:WatermarkTextBox}">
         <Setter Property="SelectionBrush" Value="{StaticResource PrimaryFocusBrush}" />
         <Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource PrimaryNormalBrush}" />
         <Setter Property="Foreground" Value="{StaticResource MarkerBrush}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Padding" Value="8 10 8 9" />
+        <Setter Property="MinHeight" Value="40" />
         <Setter Property="FontFamily" Value="{StaticResource FontFamily}" />
         <Setter Property="FontSize" Value="{StaticResource FontSize}" />
         <Setter Property="CaretBrush" Value="{StaticResource MarkerBrush}" />
@@ -26,236 +254,7 @@
         <Setter Property="IsTabStop" Value="True" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="Once" />
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="wtb:WatermarkTextBox">
-                    <shadow:Shadow x:Name="Shadow" ShadowDepth="{TemplateBinding theme:ThemeProperties.ShadowDepth}">
-                    <Grid>
-                        <!-- Border -->
-                        <Border x:Name="Border"
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                CornerRadius="{StaticResource CornerRadius}" />
-
-                        <Border x:Name="BorderFocus"
-                                Background="Transparent"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding theme:ThemeProperties.FocusBrush}"
-                                CornerRadius="{StaticResource CornerRadius}"
-                                Opacity="0" />
-
-                        <Border x:Name="BorderReadonly"
-                                Background="Transparent"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{StaticResource DisabledBrush}"
-                                CornerRadius="{StaticResource CornerRadius}"
-                                Visibility="Collapsed" />
-
-                            <Border x:Name="BorderInvalid"
-                                Background="Transparent"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{StaticResource InvalidBrush}"
-                                CornerRadius="{StaticResource CornerRadius}"
-                                Opacity="0" />
-
-                            <!-- The real Content of the TextBox (The text, x:Name must be "PART_ContentHost" because of behind laying code). -->
-                            <ScrollViewer x:Name="PART_ContentHost"
-                                Background="Transparent"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                BorderThickness="0" 
-                                IsTabStop="False"
-                                Margin="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}"
-                                  Foreground="{TemplateBinding Foreground}"
-                                  BorderBrush="Transparent" />
-                        <!-- Watermark -->
-                        <ContentControl x:Name="Watermark" 
-                                        IsTabStop="False"
-                                        FontStyle="Italic"
-                                        Content="{TemplateBinding WatermarkContent}"
-                                        ContentTemplate="{TemplateBinding WatermarkTemplate}"
-                                        VerticalAlignment="Center"
-                                        HorizontalAlignment="Left"
-                                        IsHitTestVisible="False"
-                                        Margin="{TemplateBinding Padding}"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Padding="{TemplateBinding BorderThickness}"
-                                        Background="{TemplateBinding Background}"
-                                        BorderThickness="0"
-                                        Visibility="Hidden">
-                            <ContentControl.RenderTransform>
-                                <!-- Empty RenderTransform for move -->
-                                <TranslateTransform/>
-                            </ContentControl.RenderTransform>
-                                <ContentControl.Template>
-                                <ControlTemplate TargetType="ContentControl">
-                                        <Border BorderThickness="{TemplateBinding BorderThickness}" 
-                                                BorderBrush="Transparent"
-                                                CornerRadius="{StaticResource CornerRadius}">
-                                            <Border.Background>
-                                                <!-- Makes the border disapear.. -->
-                                                <LinearGradientBrush
-                                                    StartPoint="0.5, 0"
-                                                    EndPoint="0.5, 1">
-                                                    <GradientStop Offset="0.75" Color="Transparent"/>
-                                                    <GradientStop Offset="0.6" Color="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background.(SolidColorBrush.Color)}" />
-                                                    <GradientStop Offset="0.4" Color="{Binding RelativeSource={RelativeSource TemplatedParent},Path=Background.(SolidColorBrush.Color)}"/>
-                                                    <GradientStop Offset="0.25" Color="Transparent"/>
-                                                </LinearGradientBrush>
-                                            </Border.Background>
-                                            <ContentPresenter Margin="{TemplateBinding Padding}"
-                                                              Opacity="{StaticResource SecondaryOpacity}"/>
-                                        </Border>
-                                </ControlTemplate>
-                            </ContentControl.Template>
-                        </ContentControl>
-                    </Grid>
-
-                        </shadow:Shadow>
-
-                    <!-- Animation happens here -->
-                    <ControlTemplate.Triggers>
-
-                        <!-- ReadOnly -->
-                        <Trigger Property="IsReadOnly" Value="True">
-                            <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource SecondaryOpacity}" />
-                        </Trigger>
-
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="BorderReadonly" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ContentHost" Property="Opacity" Value="{StaticResource DisabledOpacity}" />
-                            <Setter TargetName="Watermark" Property="Opacity" Value="{StaticResource DisabledOpacity}" />
-                        </Trigger>
-
-                        <!-- Focus -->
-                        <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderFocus"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderFocus"
-                                            To="0">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                        <!-- Validation -->
-                        <Trigger Property="Validation.HasError" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderInvalid"
-                                            To="1">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Storyboard.TargetName="BorderInvalid"
-                                            To="0">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-
-                        <!-- Watermark -->
-                        <Trigger Property="IsWatermarkVisible" Value="True">
-                            <Setter TargetName="Watermark" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsWatermarkMoved" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation 
-                                            Storyboard.TargetName="Watermark"
-                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            To="-20">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseIn" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation 
-                                            Storyboard.TargetName="Watermark"
-                                            Storyboard.TargetProperty="FontSize"
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            By="-2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseIn" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation 
-                                            Storyboard.TargetName="Watermark"
-                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            To="0">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation 
-                                            Storyboard.TargetName="Watermark"
-                                            Storyboard.TargetProperty="FontSize"
-                                            Duration="{StaticResource Control_AnimationDuration}"
-                                            By="2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <SineEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Template" Value="{StaticResource WatermarkTextBoxTemplate}" />
         <!-- Just override the default ErrorTemplate -->
         <Setter Property="Validation.ErrorTemplate">
             <Setter.Value>
@@ -279,5 +278,5 @@
     </Style>
 
     <!-- telerik:RadWatermarkTextBox implicit styles-->
-    <Style TargetType="wtb:WatermarkTextBox" BasedOn="{StaticResource WatermarkTextBoxStyle}" />
+    <Style TargetType="{x:Type wtb:WatermarkTextBox}" BasedOn="{StaticResource WatermarkTextBoxStyle}" />
 </ResourceDictionary>
