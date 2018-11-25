@@ -106,8 +106,10 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _loans.Remove(_loans.SingleOrDefault(l => l.Id.Equals(loan.Id)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        int index = _loans.IndexOf(_loans.SingleOrDefault(r => r.Id.Equals(loan.Id)));
-                        _loans[index] = loan;
+                        // int index = _loans.IndexOf(_loans.SingleOrDefault(r => r.Id.Equals(loan.Id)));
+                        //_loans[index] = loan;
+                        _loans.Single(l => l.Id.Equals(loan.Id)).Replace(loan);
+
                         break;
                 }
 
@@ -124,8 +126,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _gadgets.Remove(_gadgets.SingleOrDefault(g => g.InventoryNumber.Equals(gadget.InventoryNumber)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        int index = _gadgets.IndexOf(_gadgets.SingleOrDefault(r => r.InventoryNumber.Equals(gadget.InventoryNumber)));
-                        _gadgets[index] = gadget;
+                        _gadgets.Single(g => g.InventoryNumber.Equals(gadget.InventoryNumber)).Replace(gadget);
                         break;
                 }
 
@@ -142,8 +143,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _reservations.Remove(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        int index = _reservations.IndexOf(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
-                        _reservations[index] = reservation;
+                        _reservations.Single(r => r.Id.Equals(reservation.Id)).Replace(reservation);
                         break;
                 }
 
@@ -162,8 +162,7 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _customers.Remove(_customers.SingleOrDefault(c => c.Studentnumber.Equals(customer.Studentnumber)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        _customers.Remove(_customers.SingleOrDefault(c => c.Studentnumber.Equals(customer.Studentnumber)));
-                        _customers.Add(customer);
+                        _customers.Single(c => c.Studentnumber.Equals(customer.Studentnumber)).Replace(customer);
                         break;
                 }
 
