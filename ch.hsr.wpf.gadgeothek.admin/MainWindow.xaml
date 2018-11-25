@@ -10,14 +10,16 @@
         Title="MainWindow" Height="446.4" Width="728.2" d:DataContext="{d:DesignData MainWindow}">
 
     <Grid>
-
+        <Grid HorizontalAlignment="Right" 
+              VerticalAlignment="Stretch"
+              DataContext="{Binding SelectedGadget}">
         <watermarkTextBox:WatermarkTextBox HorizontalAlignment="Right" 
                                            VerticalAlignment="Top" 
                                            Width="294"
                                            Margin="0,30,9.6,0" 
                                            WatermarkContent="InventoryNumber"
                                            x:Name="WtbInventoryNumber" IsReadOnly="True"
-                                           Text="{Binding Path=Gadget.InventoryNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                           Text="{Binding InventoryNumber}"/>
 
         <watermarkTextBox:WatermarkTextBox HorizontalAlignment="Right" 
                                            VerticalAlignment="Top" 
@@ -25,7 +27,7 @@
                                            Margin="0,91,9.6,0" 
                                            WatermarkContent="Name"
                                            x:Name="WtbName"
-                                           Text="{Binding Path=Gadget.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                           Text="{Binding Name}"/>
 
         <watermarkTextBox:WatermarkTextBox HorizontalAlignment="Right" 
                                            VerticalAlignment="Top" 
@@ -33,12 +35,12 @@
                                            Margin="0,150,9.6,0" 
                                            WatermarkContent="Manufacturer"
                                            x:Name="WtbManufacturer"
-                                           Text="{Binding Path=Gadget.Manufacturer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                           Text="{Binding Manufacturer}"/>
 
         <Button Content="Save" Margin="0,0,9.6,20" x:Name="BtnSave" Click="BtnSave_OnClick"
                 IsEnabled="true" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="294" />
-
-        <ListBox x:Name="Selector" Margin="30,30,323.6,20" ItemsSource="{Binding Path=Gadgets, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="Selector_OnSelectionChanged">
+    </Grid>
+        <ListBox x:Name="Selector" Margin="30,30,323.6,20" ItemsSource="{Binding Gadgets}" SelectionChanged="Selector_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="domain:Gadget">
                     <StackPanel Orientation="Horizontal">

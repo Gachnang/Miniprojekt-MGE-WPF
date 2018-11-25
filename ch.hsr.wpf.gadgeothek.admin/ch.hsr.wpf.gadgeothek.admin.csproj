@@ -55,8 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\Window\MainWindowModel.cs" />
+    <Compile Include="Logic\ObservableRangeCollection.cs" />
     <Compile Include="Model\GadgeothekRepository.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="View\Control\Animation\BrushAnimation.cs" />
     <Compile Include="View\Control\Shadow\ShadowDepth.cs" />
     <Compile Include="View\Control\Shadow\Shadow.cs" />
@@ -65,6 +66,9 @@
       <DependentUpon>WatermarkTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Theme\ThemeProperties.cs" />
+    <Compile Include="View\Window\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,6 +82,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Control\WatermarkTextBox\WatermarkTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,9 +140,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ch.hsr.wpf.gadgeothek\ch.hsr.wpf.gadgeothek.csproj">
       <Project>{ac1eeaa5-ea41-46fc-8afe-f0cf4b936abb}</Project>

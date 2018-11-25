@@ -5,15 +5,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
-using ch.hsr.wpf.gadgeothek.admin.Annotations;
 using ch.hsr.wpf.gadgeothek.admin.Model;
+using ch.hsr.wpf.gadgeothek.Annotations;
 using ch.hsr.wpf.gadgeothek.domain;
 
 namespace ch.hsr.wpf.gadgeothek.admin {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window {
+    public partial class MainWindow : Window, INotifyPropertyChanged {
         private GadgeothekRepository _repository;
         public Collection<Gadget> Gadgets => _repository.Gadgets;
         public Gadget SelectedGadget => Selector.SelectedItem as Gadget;
@@ -24,7 +24,7 @@ namespace ch.hsr.wpf.gadgeothek.admin {
             _repository = GadgeothekRepository.GetInstance();
             _repository.Open();
 
-            DataContext = this;
+            DataContext = _repository;
         }
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e) {
@@ -37,9 +37,14 @@ namespace ch.hsr.wpf.gadgeothek.admin {
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WtbInventoryNumber.Text = SelectedGadget.InventoryNumber;
-            WtbManufacturer.Text = SelectedGadget.Manufacturer;
-            WtbName.Text = SelectedGadget.Name;
+            OnPropertyChanged("SelectedGadget");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -5,32 +5,49 @@ using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using ch.hsr.wpf.gadgeothek.admin.Annotations;
+using ch.hsr.wpf.gadgeothek.admin.Logic;
+using ch.hsr.wpf.gadgeothek.Annotations;
 using ch.hsr.wpf.gadgeothek.domain;
 using ch.hsr.wpf.gadgeothek.service;
 using ch.hsr.wpf.gadgeothek.websocket;
 
 namespace ch.hsr.wpf.gadgeothek.admin.Model
 {
+    /// <summary>
+    /// The repository.
+    /// We hold all data and update when something changes on the database.
+    /// </summary>
     public class GadgeothekRepository : IDisposable, INotifyPropertyChanged {
+        /// <summary>
+        /// Singleton
+        /// </summary>
         private static GadgeothekRepository _instance;
+
         private static String DefaultServerUrl = "http://localhost:8080";
-        private LibraryAdminService _libraryService;
+        private readonly LibraryAdminService _libraryService;
 
         private WebSocketClient _databaseObserver;
         private Task _databaseObserverTask;
 
-        private ObservableCollection<Loan> _loans;
-        public ObservableCollection<Loan> Loans => _loans;
+        private readonly ObservableRangeCollection<Loan> _loans;
+        public ObservableCollection<Loan> Loans {
+            get { return _loans; }
+        }
 
-        private ObservableCollection<Gadget> _gadgets;
-        public ObservableCollection<Gadget> Gadgets => _gadgets;
+        private readonly ObservableRangeCollection<Gadget> _gadgets;
+        public ObservableCollection<Gadget> Gadgets {
+            get { return _gadgets; }
+        }
 
-        private ObservableCollection<Reservation> _reservations;
-        public ObservableCollection<Reservation> Reservations => _reservations;
+        private readonly ObservableRangeCollection<Reservation> _reservations;
+        public ObservableCollection<Reservation> Reservations {
+            get { return _reservations; }
+        }
 
-        private ObservableCollection<Customer> _customers;
-        public ObservableCollection<Customer> Customers => _customers;
+        private readonly ObservableRangeCollection<Customer> _customers;
+        public ObservableCollection<Customer> Customers {
+            get { return _customers; }
+        }
 
         public static GadgeothekRepository GetInstance(string serverUrl = null) {
             serverUrl = String.IsNullOrEmpty(serverUrl) ? DefaultServerUrl : serverUrl;
@@ -43,6 +60,11 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
 
         protected GadgeothekRepository(string serverUrl) {
             _libraryService = new LibraryAdminService(serverUrl);
+
+            _loans = new ObservableRangeCollection<Loan>();
+            _gadgets = new ObservableRangeCollection<Gadget>();
+            _reservations = new ObservableRangeCollection<Reservation>();
+            _customers = new ObservableRangeCollection<Customer>();
         }
 
         public bool IsOpen() => _databaseObserverTask != null;
@@ -50,10 +72,10 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
         public void Open() {
             if (!IsOpen()) {
                 try {
-                    _loans = new ObservableCollection<Loan>(_libraryService.GetAllLoans());
-                    _gadgets = new ObservableCollection<Gadget>(_libraryService.GetAllGadgets());
-                    _reservations = new ObservableCollection<Reservation>(_libraryService.GetAllReservations());
-                    _customers = new ObservableCollection<Customer>(_libraryService.GetAllCustomers());
+                    _loans.ReplaceRange(_libraryService.GetAllLoans());
+                    _gadgets.ReplaceRange(_libraryService.GetAllGadgets());
+                    _reservations.ReplaceRange(_libraryService.GetAllReservations());
+                    _customers.ReplaceRange(_libraryService.GetAllCustomers());
 
                     _databaseObserver = new WebSocketClient(_libraryService.ServerUrl);
                     _databaseObserver.NotificationReceived += DatabaseObserver;
@@ -84,10 +106,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _loans.Remove(_loans.SingleOrDefault(l => l.Id.Equals(loan.Id)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        // PropertyChangedEvent will not work because of missing INotifyPropertyChanged, we remove and add item.
-                        // It's not great, but will work.
-                        _loans.Remove(_loans.SingleOrDefault(l => l.Id.Equals(loan.Id)));
-                        _loans.Add(loan);
+                        int index = _loans.IndexOf(_loans.SingleOrDefault(r => r.Id.Equals(loan.Id)));
+                        _loans[index] = loan;
                         break;
                 }
 
@@ -104,10 +124,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _gadgets.Remove(_gadgets.SingleOrDefault(g => g.InventoryNumber.Equals(gadget.InventoryNumber)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        // PropertyChangedEvent will not work because of missing INotifyPropertyChanged, we remove and add item.
-                        // It's not great, but will work.
-                        _gadgets.Remove(_gadgets.SingleOrDefault(g => g.InventoryNumber.Equals(gadget.InventoryNumber)));
-                        _gadgets.Add(gadget);
+                        int index = _gadgets.IndexOf(_gadgets.SingleOrDefault(r => r.InventoryNumber.Equals(gadget.InventoryNumber)));
+                        _gadgets[index] = gadget;
                         break;
                 }
 
@@ -124,10 +142,8 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _reservations.Remove(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        // PropertyChangedEvent will not work because of missing INotifyPropertyChanged, we remove and add item.
-                        // It's not great, but will work.
-                        _reservations.Remove(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
-                        _reservations.Add(reservation);
+                        int index = _reservations.IndexOf(_reservations.SingleOrDefault(r => r.Id.Equals(reservation.Id)));
+                        _reservations[index] = reservation;
                         break;
                 }
 
@@ -146,8 +162,6 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
                         _customers.Remove(_customers.SingleOrDefault(c => c.Studentnumber.Equals(customer.Studentnumber)));
                         break;
                     case WebSocketClientNotificationTypeEnum.Update:
-                        // PropertyChangedEvent will not work because of missing INotifyPropertyChanged, we remove and add item.
-                        // It's not great, but will work.
                         _customers.Remove(_customers.SingleOrDefault(c => c.Studentnumber.Equals(customer.Studentnumber)));
                         _customers.Add(customer);
                         break;
@@ -185,10 +199,10 @@ namespace ch.hsr.wpf.gadgeothek.admin.Model
             _databaseObserverTask?.Dispose();
             _databaseObserverTask = null;
 
-            _loans?.Clear();
-            _customers?.Clear();
-            _gadgets?.Clear();
-            _reservations?.Clear();
+            _loans.Clear();
+            _customers.Clear();
+            _gadgets.Clear();
+            _reservations.Clear();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
