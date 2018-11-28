@@ -19,9 +19,5 @@ namespace ch.hsr.wpf.gadgeothek.admin.View.Window
             Model = new MainWindowModel();
             DataContext = Model;
         }
-
-        private void BtnSave_OnClick(object sender, RoutedEventArgs e) {
-            Model.Save();
-        }
     }
 }

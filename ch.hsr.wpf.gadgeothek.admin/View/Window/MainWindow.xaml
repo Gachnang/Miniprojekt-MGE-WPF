@@ -5,43 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:watermarkTextBox="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Control.WatermarkTextBox"
         xmlns:local="clr-namespace:ch.hsr.wpf.gadgeothek.admin.View.Window"
+        xmlns:model="clr-namespace:ch.hsr.wpf.gadgeothek.admin.Model"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance local:MainWindowModel, IsDesignTimeCreatable=True}">
-    <DockPanel x:Name="Root" Dock="Top" Margin="0,0,0,0">
-        <ListBox x:Name="Selector" ItemsSource="{Binding Repository.Gadgets, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Path=SelectedGadget, Mode=TwoWay}" MinWidth="140">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Path=InventoryNumber, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBlock Text="{Binding Path=Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="{Binding Path=Condition, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Margin="8">
-            <watermarkTextBox:WatermarkTextBox 
-                Margin="10"
-                                               WatermarkContent="InventoryNumber"
-                                               x:Name="WtbInventoryNumber" IsReadOnly="True"
-                                               Text="{Binding SelectedGadget.InventoryNumber, UpdateSourceTrigger=PropertyChanged}"/>
+        d:DataContext="{d:DesignInstance model:MainWindowModel, IsDesignTimeCreatable=True}">
+    <TabControl
+        Margin="2 0 0 0"
+        HorizontalAlignment="Stretch"
+        TabStripPlacement="Left"
+        VerticalAlignment="Stretch">
+        <TabItem Header="Overview">
+            <local:OverviewTap/>
+        </TabItem>
 
-            <watermarkTextBox:WatermarkTextBox 
-                Margin="10"
-                                               WatermarkContent="Name"
-                                               x:Name="WtbName"
-                                               Text="{Binding SelectedGadget.Name, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <watermarkTextBox:WatermarkTextBox
-                Margin="10"
-                                               WatermarkContent="Manufacturer"
-                                               x:Name="WtbManufacturer"
-                                               Text="{Binding SelectedGadget.Manufacturer, UpdateSourceTrigger=PropertyChanged}"/>
-
-            <Button Content="Save" x:Name="BtnSave"  Click="BtnSave_OnClick"
-                    IsEnabled="true" Height="36" VerticalAlignment="Bottom" />
-        </StackPanel>
-    </DockPanel>
+        <TabItem Header="Gadgets">
+            <local:GadgetsTab DataContext="{Binding Path=GadgetsTabModel}"/>
+        </TabItem>
+    </TabControl>
 </Window>

@@ -56,7 +56,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Logic\Extension.cs" />
-    <Compile Include="View\Window\MainWindowModel.cs" />
+    <Compile Include="Model\GadgetsTabModel.cs" />
+    <Compile Include="View\Window\GadgetsTab.xaml.cs">
+      <DependentUpon>GadgetsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="Logic\ObservableRangeCollection.cs" />
     <Compile Include="Model\GadgeothekRepository.cs" />
     <Compile Include="View\Control\Animation\BrushAnimation.cs" />
@@ -70,23 +74,26 @@
     <Compile Include="View\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
+    <Compile Include="View\Window\OverviewTap.xaml.cs">
+      <DependentUpon>OverviewTap.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Control\WatermarkTextBox\WatermarkTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Window\GadgetsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Window\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Window\OverviewTap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -128,6 +135,12 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="View\Theme\System.Windows.TabControl">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Include="View\Theme\System.Windows.TabItem">
+      <Generator>MSBuild:Compile</Generator>
     </None>
     <Page Include="View\Theme\System.Windows.TextBox.xaml">
       <Generator>MSBuild:Compile</Generator>
